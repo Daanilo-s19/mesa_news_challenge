@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mesa_news_challenge/modules/signinPage/presenter/signin_page.dart';
+import 'package:mesa_news_challenge/modules/signin/presenter/signin_page.dart';
 
 import 'presenter/controller/signin_controller.dart';
 

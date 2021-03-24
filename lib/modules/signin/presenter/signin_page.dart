@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mesa_news_challenge/modules/signinPage/presenter/controller/signin_controller.dart';
+import 'package:mesa_news_challenge/modules/signin/presenter/controller/signin_controller.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/button/button_default_widget.dart';
+import 'package:mesa_news_challenge/widgets/button/icon_button_widget.dart';
 import 'package:mesa_news_challenge/widgets/footer/footer_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/textField/textfield_default_widget.dart';
 
@@ -23,7 +24,7 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
       body: Column(
         children: [
           MesaAppBarDefaultWidget(
-            onTapLeft: () => Modular.to.pop(),
+            prefix: MesaIconButtonWidget(),
             title: "Entrar com e-mail",
           ),
           Expanded(

@@ -75,7 +75,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   text: "Entrar com facebook",
                   textStyle: MesaTextStyleGuide.button
                       .copyWith(color: MesaColorsGuide.LINK),
-                  onPressed: () {},
+                  onPressed: () => Modular.to.popAndPushNamed("/home"),
                   backgroundColor: Colors.white,
                 ),
                 Container(
