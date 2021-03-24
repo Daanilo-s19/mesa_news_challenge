@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/widgets/animation/animation_size_widget.dart';
 import 'package:mesa_news_challenge/widgets/button/button_default_widget.dart';
+import 'package:mesa_news_challenge/widgets/footer/footer_default_widget.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -80,28 +82,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   margin: EdgeInsets.only(top: 16, bottom: 40),
                   child: MesaButtonDefaultWidget(
                     text: "Entrar com e-mail",
-                    onPressed: () {},
+                    onPressed: () => Modular.to.pushNamed("onboarding/signin"),
                     border: BorderSide(color: Colors.white, width: 1),
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Não tenho conta. ",
-                        style: MesaTextStyleGuide.heading02
-                            .copyWith(color: Colors.white),
-                      ),
-                      Text(
-                        "Cadastrar",
-                        style: MesaTextStyleGuide.heading02
-                            .copyWith(color: MesaColorsGuide.LINK),
-                      ),
-                    ],
-                  ),
-                )
+                MesaFooterDefaultWidget(
+                  text: "Não tenho conta. ",
+                  textLink: "Cadastrar",
+                  onTap: () => Modular.to.pushNamed("onboarding/signup"),
+                ),
               ],
             ),
           )),
