@@ -32,7 +32,9 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
                   margin: EdgeInsets.only(bottom: 26, top: 24),
                   child: MesaTextFieldDefaultWidget(
                     label: "Nome",
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setNewUser(
+                      controller.newUser.copyWith(name: value),
+                    ),
                   ),
                 ),
                 Container(
@@ -40,7 +42,9 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
                   child: MesaTextFieldDefaultWidget(
                     label: "E-mail",
                     keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setNewUser(
+                      controller.newUser.copyWith(email: value),
+                    ),
                   ),
                 ),
                 Container(
@@ -49,7 +53,9 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
                     label: "Senha",
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setNewUser(
+                      controller.newUser.copyWith(password: value),
+                    ),
                   ),
                 ),
                 Container(
@@ -58,7 +64,9 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
                     label: "Confirmar senha",
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setNewUser(
+                      controller.newUser.copyWith(password: value),
+                    ),
                   ),
                 ),
                 Container(
@@ -66,12 +74,14 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
                   child: MesaTextFieldDefaultWidget(
                     label: "Data de nascimento - opcional",
                     keyboardType: TextInputType.datetime,
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setNewUser(
+                      controller.newUser.copyWith(password: value),
+                    ),
                   ),
                 ),
                 MesaButtonDefaultWidget(
                   text: "cadastrar",
-                  onPressed: () {},
+                  onPressed: controller.signupUser,
                 )
               ],
             ),
