@@ -28,16 +28,6 @@ abstract class _SignupControllerBase with Store {
     } else {
       buttonType = MesaButtonType.DISABLED;
     }
-    // if (newUser.email != null &&
-    //     MesaUtils.isValidEmail(newUser.email) &&
-    //     newUser.password != null &&
-    //     newUser.password.length >= 6 &&
-    //     newUser.confirmPassword != null &&
-    //     newUser.confirmPassword == newUser.password) {
-    //   buttonType = MesaButtonType.PRIMARY;
-    // } else {
-    //   buttonType = MesaButtonType.DISABLED;
-    // }
   }
 
   @action
@@ -45,10 +35,11 @@ abstract class _SignupControllerBase with Store {
     if (buttonType != MesaButtonType.DISABLED) {
       buttonType = MesaButtonType.LOADING;
 
-      // final result = await signupUserUseCase(newUser);
-      // result.fold((l) {
-      //   buttonType = MesaButtonType.PRIMARY;
-      // }, (r) => print(r));
+      final result = await signupUserUseCase(newUser);
+      result.fold((error) {
+        MesaUtils.showLongToast(error.message);
+        buttonType = MesaButtonType.PRIMARY;
+      }, (success) => print(success));
     } else {
       isFormError = true;
     }

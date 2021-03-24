@@ -24,6 +24,36 @@ mixin _$SigninController on _SigninControllerBase, Store {
     });
   }
 
+  final _$isFormErrorAtom = Atom(name: '_SigninControllerBase.isFormError');
+
+  @override
+  bool get isFormError {
+    _$isFormErrorAtom.reportRead();
+    return super.isFormError;
+  }
+
+  @override
+  set isFormError(bool value) {
+    _$isFormErrorAtom.reportWrite(value, super.isFormError, () {
+      super.isFormError = value;
+    });
+  }
+
+  final _$loadingAtom = Atom(name: '_SigninControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$signinUserAsyncAction =
       AsyncAction('_SigninControllerBase.signinUser');
 
@@ -36,11 +66,11 @@ mixin _$SigninController on _SigninControllerBase, Store {
       ActionController(name: '_SigninControllerBase');
 
   @override
-  dynamic setSignin(SigninModel value) {
+  dynamic setUser(SigninModel value) {
     final _$actionInfo = _$_SigninControllerBaseActionController.startAction(
-        name: '_SigninControllerBase.setSignin');
+        name: '_SigninControllerBase.setUser');
     try {
-      return super.setSignin(value);
+      return super.setUser(value);
     } finally {
       _$_SigninControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -49,7 +79,9 @@ mixin _$SigninController on _SigninControllerBase, Store {
   @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+isFormError: ${isFormError},
+loading: ${loading}
     ''';
   }
 }

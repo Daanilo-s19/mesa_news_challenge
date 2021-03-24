@@ -18,7 +18,7 @@ class ApiDataSource implements SignupDataSource {
       return SignupModel.fromMap(response.data);
     } on DioError catch (ex, s) {
       print('ex -> $ex, stack -> $s');
-      throw FailureSignup(message: "");
+      throw FailureSignup(message: ex.response.data["message"]);
     }
   }
 }

@@ -4,8 +4,8 @@ import 'package:mesa_news_challenge/modules/signin/domain/entities/signin_entity
 
 class SigninModel extends Signin {
   SigninModel({
-    String email,
-    String password,
+    String email = "",
+    String password = "",
   }) : super(email: email, password: password);
 
   SigninModel copyWith({
