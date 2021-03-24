@@ -3,20 +3,32 @@ import 'package:mesa_news_challenge/modules/signup/domain/entities/signup_entity
 
 class SignupModel extends Signup {
   SignupModel({
-    String name,
-    String email,
-    String password,
-  }) : super(name: name, email: email, password: password);
+    String name = "",
+    String email = "",
+    String password = "",
+    String confirmPassword = "",
+    DateTime birthday,
+  }) : super(
+          name: name,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+          birthday: birthday,
+        );
 
   SignupModel copyWith({
     String name,
     String email,
     String password,
+    String confirmPassword,
+    DateTime birthday,
   }) {
     return SignupModel(
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
+      confirmPassword: confirmPassword ?? this.confirmPassword,
+      birthday: birthday ?? this.birthday,
     );
   }
 
@@ -25,6 +37,8 @@ class SignupModel extends Signup {
       'name': name,
       'email': email,
       'password': password,
+      "confirmPassword": confirmPassword,
+      "birthday": birthday,
     };
   }
 
@@ -33,6 +47,8 @@ class SignupModel extends Signup {
       name: map['name'],
       email: map['email'],
       password: map['password'],
+      birthday:
+          map["birthday"] != null ? DateTime.parse(map["birthday"]) : null,
     );
   }
 
@@ -43,7 +59,7 @@ class SignupModel extends Signup {
 
   @override
   String toString() =>
-      'SignupModel(name: $name,email: $email, password: $password)';
+      'SignupModel(name: $name,email: $email, password: $password,confirmPassword: $confirmPassword,birthday: $birthday)';
 
   @override
   bool operator ==(Object other) {
@@ -52,9 +68,16 @@ class SignupModel extends Signup {
     return other is SignupModel &&
         other.name == name &&
         other.email == email &&
-        other.password == password;
+        other.password == password &&
+        other.confirmPassword == confirmPassword &&
+        other.birthday == birthday;
   }
 
   @override
-  int get hashCode => name.hashCode ^ email.hashCode ^ password.hashCode;
+  int get hashCode =>
+      name.hashCode ^
+      email.hashCode ^
+      password.hashCode ^
+      confirmPassword.hashCode ^
+      birthday.hashCode;
 }

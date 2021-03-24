@@ -24,6 +24,36 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
+  final _$buttonTypeAtom = Atom(name: '_SignupControllerBase.buttonType');
+
+  @override
+  MesaButtonType get buttonType {
+    _$buttonTypeAtom.reportRead();
+    return super.buttonType;
+  }
+
+  @override
+  set buttonType(MesaButtonType value) {
+    _$buttonTypeAtom.reportWrite(value, super.buttonType, () {
+      super.buttonType = value;
+    });
+  }
+
+  final _$isFormErrorAtom = Atom(name: '_SignupControllerBase.isFormError');
+
+  @override
+  bool get isFormError {
+    _$isFormErrorAtom.reportRead();
+    return super.isFormError;
+  }
+
+  @override
+  set isFormError(bool value) {
+    _$isFormErrorAtom.reportWrite(value, super.isFormError, () {
+      super.isFormError = value;
+    });
+  }
+
   final _$signupUserAsyncAction =
       AsyncAction('_SignupControllerBase.signupUser');
 
@@ -49,7 +79,9 @@ mixin _$SignupController on _SignupControllerBase, Store {
   @override
   String toString() {
     return '''
-newUser: ${newUser}
+newUser: ${newUser},
+buttonType: ${buttonType},
+isFormError: ${isFormError}
     ''';
   }
 }
