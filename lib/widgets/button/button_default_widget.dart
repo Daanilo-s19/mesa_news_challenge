@@ -35,6 +35,7 @@ class _MesaButtonDefaultWidgetState extends State<MesaButtonDefaultWidget> {
           side: widget.border ?? BorderSide.none,
           borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
+        elevation: 0,
         child: Text(
           widget.text,
           style: widget.textStyle ?? MesaTextStyleGuide.button,

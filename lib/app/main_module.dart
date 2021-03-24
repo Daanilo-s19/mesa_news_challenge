@@ -18,7 +18,7 @@ class AppModule extends MainModule {
         ModularRouter("/onboarding",
             module: OnboardingModule(),
             duration: Duration(milliseconds: 500),
-            transition: TransitionType.downToUp),
+            transition: TransitionType.fadeIn),
       ];
 
   static Inject get to => Inject<AppModule>.of();

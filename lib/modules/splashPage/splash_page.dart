@@ -34,8 +34,7 @@ class _SplashScreenState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    WidgetsFlutterBinding.ensureInitialized();
+        SystemUiOverlayStyle(statusBarColor: MesaColorsGuide.PRIMARY));
     //If you want to set the font size is scaled according to the system's "font size" assist option
 
     return Scaffold(
