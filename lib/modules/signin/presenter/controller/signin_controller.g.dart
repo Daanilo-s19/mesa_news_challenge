@@ -9,18 +9,18 @@ part of 'signin_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SigninController on _SigninControllerBase, Store {
-  final _$signinAtom = Atom(name: '_SigninControllerBase.signin');
+  final _$userAtom = Atom(name: '_SigninControllerBase.user');
 
   @override
-  SigninModel get signin {
-    _$signinAtom.reportRead();
-    return super.signin;
+  SigninModel get user {
+    _$userAtom.reportRead();
+    return super.user;
   }
 
   @override
-  set signin(SigninModel value) {
-    _$signinAtom.reportWrite(value, super.signin, () {
-      super.signin = value;
+  set user(SigninModel value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
     });
   }
 
@@ -49,7 +49,7 @@ mixin _$SigninController on _SigninControllerBase, Store {
   @override
   String toString() {
     return '''
-signin: ${signin}
+user: ${user}
     ''';
   }
 }

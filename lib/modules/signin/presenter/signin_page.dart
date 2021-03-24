@@ -41,7 +41,7 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
                 MesaTextFieldDefaultWidget(
                   label: "Login",
                   onChanged: (value) => controller.setSignin(
-                    controller.signin.copyWith(email: value),
+                    controller.user.copyWith(email: value),
                   ),
                 ),
                 Container(
@@ -51,7 +51,7 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     onChanged: (value) => controller.setSignin(
-                      controller.signin.copyWith(password: value),
+                      controller.user.copyWith(password: value),
                     ),
                   ),
                 ),
