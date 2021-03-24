@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
 import 'package:mesa_news_challenge/enum/mesa_button_type.dart';
 import 'package:mesa_news_challenge/modules/signup/data/models/signup_model.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/usecases/signup_user_usecase.dart';
@@ -8,9 +10,11 @@ part 'signup_controller.g.dart';
 class SignupController = _SignupControllerBase with _$SignupController;
 
 abstract class _SignupControllerBase with Store {
+  final AppController appController;
+
   final SignupUserUseCase signupUserUseCase;
 
-  _SignupControllerBase(this.signupUserUseCase);
+  _SignupControllerBase(this.signupUserUseCase, this.appController);
   @observable
   SignupModel newUser = SignupModel();
   @observable
@@ -39,7 +43,10 @@ abstract class _SignupControllerBase with Store {
       result.fold((error) {
         MesaUtils.showLongToast(error.message);
         buttonType = MesaButtonType.PRIMARY;
-      }, (success) => print(success));
+      }, (user) {
+        appController.userController.setUserData(user);
+        Modular.to.popAndPushNamed("/home");
+      });
     } else {
       isFormError = true;
     }

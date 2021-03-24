@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -14,10 +15,15 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashPage> {
+  final _userController = Modular.get<AppController>().userController;
   final int _splashTimer = 3000;
 
   void navigationToNextPage() async {
-    Modular.to.pushReplacementNamed('/onboarding');
+    if (_userController.user != null) {
+      Modular.to.pushReplacementNamed('/home');
+    } else {
+      Modular.to.pushReplacementNamed('/onboarding');
+    }
   }
 
   startSplashScreenTimer() async {

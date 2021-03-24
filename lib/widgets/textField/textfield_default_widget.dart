@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 
@@ -7,6 +8,8 @@ class MesaTextFieldDefaultWidget extends StatefulWidget {
   final TextInputType keyboardType;
   final bool autofocus, obscureText;
   final Function(String) onChanged;
+  final List<TextInputFormatter> maskFormatter;
+  final String errorText;
 
   MesaTextFieldDefaultWidget(
       {Key key,
@@ -14,7 +17,9 @@ class MesaTextFieldDefaultWidget extends StatefulWidget {
       this.autofocus = false,
       this.onChanged,
       this.label = "",
-      this.obscureText = false})
+      this.obscureText = false,
+      this.maskFormatter,
+      this.errorText})
       : super(key: key);
 
   @override
@@ -40,16 +45,19 @@ class _MesaTextFieldDefaultWidgetState
             keyboardType: widget.keyboardType,
             autofocus: widget.autofocus,
             obscureText: widget.obscureText,
+            inputFormatters:
+                widget.maskFormatter != null ? widget.maskFormatter : [],
             decoration: InputDecoration(
               filled: true,
               fillColor: MesaColorsGuide.GRAY01,
+              errorText: widget.errorText,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 borderSide: BorderSide.none,
               ),
             ),
             onChanged: widget.onChanged,
-            style: MesaTextStyleGuide.heading03,
+            style: MesaTextStyleGuide.subtitle02,
           ),
         ),
       ],

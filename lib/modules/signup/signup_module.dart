@@ -11,7 +11,7 @@ class SignupModule extends ChildModule {
         Bind((i) => ApiDataSource(i())),
         Bind((i) => SignupRepositoryImpl(i())),
         Bind((i) => SignupUserUseCaseImpl(i())),
-        Bind((i) => SignupController(i())),
+        Bind((i) => SignupController(i(), i())),
       ];
 
   @override

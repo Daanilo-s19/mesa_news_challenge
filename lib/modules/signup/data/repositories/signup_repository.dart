@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/modules/signup/data/datasources/signup_datasources.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/entities/signup_entity.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/errors/errors.dart';
@@ -10,7 +11,7 @@ class SignupRepositoryImpl implements SignupRepository {
   SignupRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<FailureSignup, Signup>> signup(Signup user) async {
+  Future<Either<FailureSignup, User>> signup(Signup user) async {
     try {
       final result = await dataSource.signup(user);
       return Right(result);

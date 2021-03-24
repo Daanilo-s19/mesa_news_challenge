@@ -12,7 +12,7 @@ class SigninModule extends ChildModule {
         Bind((i) => ApiDataSource(i())),
         Bind((i) => SigninRepositoryImpl(i())),
         Bind((i) => SigninUserUseCaseImpl(i())),
-        Bind((i) => SigninController(i())),
+        Bind((i) => SigninController(i(), i())),
       ];
 
   @override
