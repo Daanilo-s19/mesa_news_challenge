@@ -35,6 +35,16 @@ class MesaTextStyleGuide {
     fontFamily: "Roboto",
   );
 
+  ///font-weight: w500;
+  ///font-size: 14px;
+  ///color: #GRAY02;
+  static final heading03 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: MesaColorsGuide.GRAY02,
+    fontFamily: "Roboto",
+  );
+
   ///font-weight: w700;
   ///font-size: 15px;
   ///color: #white;
