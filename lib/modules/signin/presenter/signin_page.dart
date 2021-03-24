@@ -40,7 +40,9 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
                 ),
                 MesaTextFieldDefaultWidget(
                   label: "Login",
-                  onChanged: (value) {},
+                  onChanged: (value) => controller.setSignin(
+                    controller.signin.copyWith(email: value),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 32),
@@ -48,12 +50,14 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
                     label: "Senha",
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
-                    onChanged: (value) {},
+                    onChanged: (value) => controller.setSignin(
+                      controller.signin.copyWith(password: value),
+                    ),
                   ),
                 ),
                 MesaButtonDefaultWidget(
                   text: "Login",
-                  onPressed: () {},
+                  onPressed: controller.signinUser,
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 134, bottom: 24),
