@@ -22,12 +22,14 @@ class _SignupPageState extends ModularState<SignupPage, SignupController> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(44),
+          child: MesaAppBarDefaultWidget(
+            title: "Cadastrar",
+          ),
+        ),
         body: Column(
           children: [
-            MesaAppBarDefaultWidget(
-              prefix: MesaIconButtonWidget(),
-              title: "Cadastrar",
-            ),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),

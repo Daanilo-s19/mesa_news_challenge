@@ -3,13 +3,17 @@ import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/widgets/button/icon_button_widget.dart';
 
 class MesaCardLastNewsWidget extends StatefulWidget {
-  final String imagePath, title, description, dateTime;
+  final String imagePath, title, description, dateTime, content;
+  final Function() onChanged, onTap;
   MesaCardLastNewsWidget(
       {Key key,
       this.imagePath = "",
       this.title = "",
-      this.description = "",
-      this.dateTime = ""})
+      this.description,
+      this.dateTime = "",
+      this.onChanged,
+      this.onTap,
+      this.content})
       : super(key: key);
 
   @override
@@ -19,47 +23,68 @@ class MesaCardLastNewsWidget extends StatefulWidget {
 class _MesaCardLastNewsWidgetState extends State<MesaCardLastNewsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-            widget.imagePath,
-            height: 128,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MesaIconButtonWidget(),
-              Text(
-                widget.dateTime,
-                style: MesaTextStyleGuide.heading05,
+    return InkWell(
+      onTap: widget.onTap ?? null,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+              widget.imagePath,
+              height: 128,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MesaIconButtonWidget(
+                    iconPath: "assets/bookmark.svg",
+                    onTap: widget.onChanged ?? () {},
+                  ),
+                  Text(
+                    widget.dateTime,
+                    style: MesaTextStyleGuide.heading05,
+                  ),
+                ],
               ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              widget.title,
-              style: MesaTextStyleGuide.subtitle02
-                  .copyWith(fontWeight: FontWeight.w700),
-              overflow: TextOverflow.clip,
             ),
-          ),
-          Container(
-            height: 54,
-            child: Text(
-              widget.description,
-              maxLines: 2,
-              style: MesaTextStyleGuide.heading05
-                  .copyWith(fontStyle: FontStyle.normal),
-              overflow: TextOverflow.clip,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                widget.title,
+                style: MesaTextStyleGuide.subtitle02
+                    .copyWith(fontWeight: FontWeight.w700),
+                overflow: TextOverflow.clip,
+              ),
             ),
-          ),
-        ],
+            widget.description != null
+                ? Container(
+                    height: 54,
+                    child: Text(
+                      widget.description,
+                      maxLines: 2,
+                      style: MesaTextStyleGuide.heading05
+                          .copyWith(fontStyle: FontStyle.normal),
+                      overflow: TextOverflow.clip,
+                    ),
+                  )
+                : SizedBox(),
+            widget.content != null
+                ? Container(
+                    margin: EdgeInsets.only(top: 24),
+                    child: Text(
+                      widget.content,
+                      style: MesaTextStyleGuide.heading05
+                          .copyWith(fontStyle: FontStyle.normal),
+                    ),
+                  )
+                : SizedBox(),
+          ],
+        ),
       ),
     );
   }

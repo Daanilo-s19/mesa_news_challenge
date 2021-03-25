@@ -24,12 +24,14 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(44),
+          child: MesaAppBarDefaultWidget(
+            title: "Entrar com e-mail",
+          ),
+        ),
         body: Column(
           children: [
-            MesaAppBarDefaultWidget(
-              prefix: MesaIconButtonWidget(),
-              title: "Entrar com e-mail",
-            ),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),

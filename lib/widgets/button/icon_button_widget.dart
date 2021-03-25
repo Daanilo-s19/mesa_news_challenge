@@ -5,14 +5,18 @@ import 'package:flutter_svg/svg.dart';
 class MesaIconButtonWidget extends StatelessWidget {
   final Function() onTap;
   final String iconPath;
-
-  const MesaIconButtonWidget({Key key, this.onTap, this.iconPath})
+  final Color iconColor;
+  const MesaIconButtonWidget(
+      {Key key, this.onTap, this.iconPath, this.iconColor})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap ?? () => Modular.to.pop(),
-      child: SvgPicture.asset(iconPath ?? "assets/close.svg"),
+      child: SvgPicture.asset(
+        iconPath ?? "assets/close.svg",
+        color: iconColor ?? null,
+      ),
     );
   }
 }
