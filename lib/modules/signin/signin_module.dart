@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mesa_news_challenge/modules/signin/data/repositories/signin_repository.dart';
+import 'package:mesa_news_challenge/modules/signin/data/repositories/signin_repository_impl.dart';
 import 'package:mesa_news_challenge/modules/signin/domain/usecases/signin_user_usecase.dart';
 import 'package:mesa_news_challenge/modules/signin/presenter/signin_page.dart';
 

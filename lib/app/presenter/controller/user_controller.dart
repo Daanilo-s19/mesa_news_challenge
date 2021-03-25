@@ -22,7 +22,6 @@ abstract class _UserControllerBase with Store {
     if (result.isNotEmpty) {
       user = UserModel.fromMap(json.decode(result));
     }
-    print("[getUserData] $user");
   }
 
   @action

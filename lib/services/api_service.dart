@@ -16,18 +16,13 @@ class ApiService {
 
   static const Map<String, dynamic> HEADERS = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Connection': 'keep-alive',
-    'Accept-Encoding': 'gzip',
   };
 
   ApiService() {
     _dio.options.headers = _fromStaticHeaders();
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (final Options options) {
-        if (_userController.user != null) {
-          _insertUserTokenIntoHeader(_dio.options.headers);
-        }
+        _insertUserTokenIntoHeader(options.headers);
         return options;
       },
       onError: (final DioError e) async {
@@ -54,8 +49,10 @@ class ApiService {
   Map<String, dynamic> _fromStaticHeaders() =>
       Map<String, dynamic>.from(HEADERS);
 
-  void _insertUserTokenIntoHeader(Map<String, dynamic> headers) {
-    headers['Authorization'] = 'Bearer ${_userController.user.token}';
+  void _insertUserTokenIntoHeader(final Map<String, dynamic> headers) {
+    if (_userController.user != null) {
+      headers['Authorization'] = 'Bearer ${_userController.user.token}';
+    }
   }
 
   String _generateURI(final String path, {final Map<String, String> query}) {
@@ -63,7 +60,7 @@ class ApiService {
   }
 
   Future<Response> signinUser(SigninModel user) async {
-    String uri = _generateURI('/auth/signin');
+    String uri = _generateURI('/auth/signin/');
     return _dio.post(uri, data: user.toJson());
   }
 
@@ -72,7 +69,11 @@ class ApiService {
     return _dio.post(uri, data: user.toJson());
   }
 
-  Future<Response> fetchNews() async {
+  Future<Response> fetchNews({
+    int currentPage,
+    int perPage,
+    DateTime published,
+  }) async {
     String uri = _generateURI('/news');
     return _dio.get(uri);
   }

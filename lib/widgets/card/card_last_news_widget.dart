@@ -41,7 +41,6 @@ class _MesaCardLastNewsWidgetState extends State<MesaCardLastNewsWidget> {
             ],
           ),
           Container(
-            height: 44,
             margin: EdgeInsets.symmetric(vertical: 8),
             child: Text(
               widget.title,
@@ -54,6 +53,7 @@ class _MesaCardLastNewsWidgetState extends State<MesaCardLastNewsWidget> {
             height: 54,
             child: Text(
               widget.description,
+              maxLines: 2,
               style: MesaTextStyleGuide.heading05
                   .copyWith(fontStyle: FontStyle.normal),
               overflow: TextOverflow.clip,

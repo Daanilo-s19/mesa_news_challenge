@@ -17,7 +17,6 @@ class ApiDataSource implements SigninDataSource {
   Future<User> signin(Signin user) async {
     try {
       final response = await appController.apiService.signinUser(user);
-      print("response $response");
       return UserModel.fromMap(response.data);
     } on DioError catch (ex, s) {
       print('ex -> $ex, stack -> $s');

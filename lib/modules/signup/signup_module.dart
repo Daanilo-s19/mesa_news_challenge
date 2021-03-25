@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/modules/signup/services/api_datasources.dart';
-import 'data/repositories/signup_repository.dart';
+import 'data/repositories/signup_repository_impl.dart';
 import 'domain/usecases/signup_user_usecase.dart';
 import 'presenter/controller/signup_controller.dart';
 import 'presenter/signup_page.dart';

@@ -16,14 +16,13 @@ class _MesaCardTrendWidgetState extends State<MesaCardTrendWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 317,
-      height: 128,
       child: Row(
         children: [
           Container(
             margin: EdgeInsets.only(right: 16),
             child: Image.network(
               widget.imagePath,
-              height: 128,
+              height: 127,
               width: 128,
               fit: BoxFit.cover,
             ),
