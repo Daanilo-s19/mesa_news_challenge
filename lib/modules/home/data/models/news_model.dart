@@ -9,6 +9,7 @@ class NewsModel extends News {
     String content,
     DateTime published,
     bool highlight,
+    bool favorite = false,
     String url,
     String imageUrl,
   }) : super(
@@ -18,6 +19,7 @@ class NewsModel extends News {
           content: content,
           published: published,
           highlight: highlight,
+          favorite: favorite,
           url: url,
           imageUrl: imageUrl,
         );
@@ -29,6 +31,7 @@ class NewsModel extends News {
     String content,
     DateTime published,
     bool highlight,
+    bool favorite,
     String url,
     String imageUrl,
   }) {
@@ -39,6 +42,7 @@ class NewsModel extends News {
       content: content ?? this.content,
       published: published ?? this.published,
       highlight: highlight ?? this.highlight,
+      favorite: favorite ?? this.favorite,
       url: url ?? this.url,
       imageUrl: imageUrl ?? this.imageUrl,
     );
@@ -52,6 +56,7 @@ class NewsModel extends News {
       'content': content,
       'published': published.millisecondsSinceEpoch,
       'highlight': highlight,
+      "favorite": favorite,
       'url': url,
       'imageUrl': imageUrl,
     };
@@ -61,6 +66,7 @@ class NewsModel extends News {
     if (map == null) return null;
 
     return NewsModel(
+      favorite: map["favorite"] ?? false,
       title: map['title'],
       description: map['description'],
       author: map['author'],
@@ -81,7 +87,7 @@ class NewsModel extends News {
 
   @override
   String toString() {
-    return 'NewsModel(title: $title, description: $description, author: $author, content: $content, published: $published, highlight: $highlight, url: $url, imageUrl: $imageUrl)';
+    return 'NewsModel(title: $title, description: $description, author: $author, content: $content, published: $published, highlight: $highlight,favorite: $favorite, url: $url, imageUrl: $imageUrl)';
   }
 
   @override
@@ -90,6 +96,7 @@ class NewsModel extends News {
 
     return other is NewsModel &&
         other.title == title &&
+        other.favorite == favorite &&
         other.description == description &&
         other.author == author &&
         other.content == content &&
@@ -107,6 +114,7 @@ class NewsModel extends News {
         content.hashCode ^
         published.hashCode ^
         highlight.hashCode ^
+        favorite.hashCode ^
         url.hashCode ^
         imageUrl.hashCode;
   }

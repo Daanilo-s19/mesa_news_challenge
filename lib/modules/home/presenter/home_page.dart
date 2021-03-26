@@ -10,6 +10,7 @@ import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/button/icon_button_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_last_news_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_trend_widget.dart';
+import 'package:mobx/mobx.dart';
 
 import 'controller/home_controller.dart';
 
@@ -32,6 +33,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       );
   List<Widget> _renderNewsHighlight({List<News> newsHighlight}) {
+    if (newsHighlight.isEmpty) {
+      return [
+        Text("Parece que não temos notícias em destaque :("),
+      ];
+    }
     return newsHighlight
         .map(
           (item) => item.highlight
@@ -43,9 +49,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         imagePath: item.imageUrl,
                         title: item.title,
                         dateTime: "2 horas atrás",
-                        onChanged: () => print("cloquei no marcador"),
+                        isbookmark: item.favorite,
+                        isShow: controller.isFavorite ? item.favorite : true,
+                        onChanged: () => controller.setFavoriteHighlight(item),
                         onTap: () =>
-                            _redirectToNewPage(item: item, title: "Destaque"),
+                            _redirectToNewPage(item: item, title: "Destaques"),
                       ),
                     ),
                     Divider(color: MesaColorsGuide.GRAY03, height: 1),
@@ -57,67 +65,91 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   List<Widget> _renderNews({List<News> news}) {
-    return news
-        .map((item) => Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(16),
-                  child: MesaCardLastNewsWidget(
-                    imagePath: item.imageUrl,
-                    title: item.title,
-                    description: item.description,
-                    onTap: () => _redirectToNewPage(
-                        item: item, title: "Últimas notícias"),
-                    dateTime: "2 horas atrás",
-                  ),
-                ),
-                Divider(color: MesaColorsGuide.GRAY03, height: 1),
-              ],
-            ))
+    if (news.isEmpty) {
+      return [
+        Text("Parece que ainda não temos nenhuma notícias para exibir :("),
+      ];
+    }
+
+    return controller.news
+        .map(
+          (item) => item.highlight
+              ? Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(16),
+                      child: MesaCardLastNewsWidget(
+                        imagePath: item.imageUrl,
+                        title: item.title,
+                        description: item.description,
+                        onTap: () => _redirectToNewPage(
+                            item: item, title: "Últimas notícias"),
+                        isbookmark: item.favorite,
+                        isShow: controller.isFavorite ? item.favorite : true,
+                        onChanged: () => controller.setFavoriteNews(item),
+                        dateTime: item.published.toIso8601String(),
+                      ),
+                    ),
+                    Divider(color: MesaColorsGuide.GRAY03, height: 1),
+                  ],
+                )
+              : SizedBox(),
+        )
         .toList();
+  }
+
+  Widget _render() {
+    if (controller.loading) {
+      return Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 1,
+        ),
+      );
+    } else {
+      return ListView(
+        padding: EdgeInsets.all(0),
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 24, bottom: 16, left: 16),
+            child: Text("Destaques", style: MesaTextStyleGuide.subtitle01),
+          ),
+          Container(
+            height: 128,
+            child: ListView(
+              padding: EdgeInsets.only(left: 16),
+              scrollDirection: Axis.horizontal,
+              children: _renderNewsHighlight(
+                  newsHighlight: controller.newshighlights),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 40, bottom: 2, left: 16),
+            child:
+                Text("Últimas notícias", style: MesaTextStyleGuide.subtitle01),
+          ),
+          ..._renderNews(news: controller.news),
+        ],
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(44),
-          child: MesaAppBarDefaultWidget(
-            title: "Mesa News",
-            prefix: SizedBox(),
-            sufix: IconButton(
-              icon: SvgPicture.asset("assets/filter.svg"),
-              tooltip: 'Filter',
-              onPressed: () {},
-            ),
+    return Scaffold(
+      backgroundColor: MesaColorsGuide.GRAY06,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(44),
+        child: MesaAppBarDefaultWidget(
+          title: "Mesa News",
+          prefix: SizedBox(),
+          sufix: IconButton(
+            icon: SvgPicture.asset("assets/filter.svg"),
+            tooltip: 'Filter',
+            onPressed: () => Modular.to.pushNamed("/home/filter"),
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.all(0),
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 24, bottom: 16, left: 16),
-              child: Text("Destaques", style: MesaTextStyleGuide.subtitle01),
-            ),
-            Container(
-              height: 128,
-              child: ListView(
-                padding: EdgeInsets.only(left: 16),
-                scrollDirection: Axis.horizontal,
-                children: _renderNewsHighlight(
-                    newsHighlight: controller.newshighlights),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 40, bottom: 2, left: 16),
-              child: Text("Últimas notícias",
-                  style: MesaTextStyleGuide.subtitle01),
-            ),
-            ..._renderNews(news: controller.news),
-          ],
-        ),
       ),
+      body: Observer(builder: (_) => _render()),
     );
   }
 }

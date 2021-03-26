@@ -96,6 +96,19 @@ class MesaTextStyleGuide {
     fontFamily: "Roboto",
   );
 
+  ///font-weight: normal;
+  ///font-size: 17px;
+  /// etterSpacing: -.41,
+  ///color: #black;
+
+  static final heading06 = TextStyle(
+    fontSize: 17,
+    fontWeight: FontWeight.normal,
+    letterSpacing: -.41,
+    color: Colors.black,
+    fontFamily: "Roboto",
+  );
+
   ///font-weight: w700;
   ///font-size: 15px;
   ///color: #white;

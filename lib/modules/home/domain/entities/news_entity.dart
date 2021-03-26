@@ -5,11 +5,13 @@ class News {
   final String content;
   final DateTime published;
   final bool highlight;
+  final bool favorite;
   final String url;
   final String imageUrl;
 
   News(
-      {this.title,
+      {this.favorite = false,
+      this.title,
       this.description,
       this.author,
       this.content,

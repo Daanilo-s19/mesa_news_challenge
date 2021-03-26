@@ -1,3 +1,4 @@
+import 'package:mesa_news_challenge/modules/home/data/models/news_model.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_highlight_usecase.dart';
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_usecase.dart';
@@ -15,25 +16,78 @@ abstract class _HomeControllerBase with Store {
   }
 
   @observable
-  List<News> news = [];
+  bool loading;
   @observable
-  List<News> newshighlights = [];
+  bool isFavorite = false;
+  @observable
+  ObservableList<News> news = ObservableList<News>();
+  @observable
+  ObservableList<News> newshighlights = ObservableList<News>();
 
   @action
   getNews() async {
+    loading = true;
     final result = await getNewsUseCase();
     result.fold(
       (error) => print(error.message),
-      (success) => news = success.toSet().toList(),
+      (success) {
+        final orderingNews = setOrdering(success).toSet().toList();
+        news = ObservableList.of(orderingNews);
+      },
     );
+    loading = false;
   }
 
   @action
   getNewsHighlight() async {
+    loading = true;
     final result = await getNewsHighlightUseCase();
     result.fold(
       (error) => print(error.message),
-      (success) => newshighlights = success.toSet().toList(),
+      (success) {
+        // final orderingHigh = setOrdering(success).toSet().toList();
+        newshighlights = ObservableList.of(success.toSet().toList());
+      },
     );
+    loading = false;
   }
+
+  @action
+  setFavoriteNews(NewsModel item) {
+    news.removeWhere((e) => e.title == item.title);
+    final changed = item.copyWith(favorite: !item.favorite);
+    news.add(changed);
+    setOrdering(news);
+  }
+
+  @action
+  setFavoriteHighlight(NewsModel item) {
+    newshighlights.removeWhere((e) => e.title == item.title);
+    final changed = item.copyWith(favorite: !item.favorite);
+    newshighlights.add(changed);
+    setOrdering(newshighlights);
+  }
+
+  List<News> setOrdering(List<News> order) {
+    order.sort((a, b) {
+      final comparePublished = b.published.compareTo(a.published);
+      final compareTitle = a.title.compareTo(b.title);
+
+      ///SE ambos forem favoritos, checo as datas para definir a ordem
+      if (a.favorite == b.favorite) {
+        ///SE ambos forem da mesma data, checo o titulo para definir a ordem
+        if (comparePublished == 0) {
+          return compareTitle;
+        } else {
+          return comparePublished;
+        }
+      } else {
+        return a.favorite ? -1 : 1;
+      }
+    });
+    return order;
+  }
+
+  @action
+  toogleFavorite(bool value) => isFavorite = value;
 }
