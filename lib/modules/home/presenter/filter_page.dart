@@ -7,6 +7,7 @@ import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/button/button_switch_widget.dart';
+import 'package:intl/intl.dart';
 
 class FilterPage extends StatefulWidget {
   @override
@@ -15,8 +16,10 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> {
   final controller = Modular.get<HomeController>();
+
   @override
   Widget build(BuildContext context) {
+    controller.context = context;
     return Observer(
       builder: (_) => Scaffold(
         appBar: PreferredSize(
@@ -34,7 +37,7 @@ class _FilterPageState extends State<FilterPage> {
                   color: MesaColorsGuide.LINK,
                 ),
               ),
-              onTap: () {},
+              onTap: controller.cleanFilter,
             ),
           ),
         ),
@@ -53,7 +56,25 @@ class _FilterPageState extends State<FilterPage> {
                       style: MesaTextStyleGuide.heading06,
                     ),
                   ),
-                  SvgPicture.asset("assets/next.svg")
+                  Container(
+                    width: 200,
+                    height: 44,
+                    child: ListTile(
+                      subtitle: Text(""),
+                      title: Text(
+                        controller.filterPerDate != null
+                            ? DateFormat("dd/MM/yyyy")
+                                .format(controller.filterPerDate)
+                            : "Todas",
+                        textAlign: TextAlign.right,
+                        style: MesaTextStyleGuide.heading06
+                            .copyWith(fontStyle: FontStyle.italic),
+                      ),
+                      isThreeLine: true,
+                      trailing: SvgPicture.asset("assets/next.svg"),
+                      onTap: controller.showDateTimePicker,
+                    ),
+                  ),
                 ],
               ),
               Divider(

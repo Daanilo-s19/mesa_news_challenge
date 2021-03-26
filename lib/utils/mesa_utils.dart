@@ -1,5 +1,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
+import 'package:intl/intl.dart';
 
 class MesaUtils {
   static MaskTextInputFormatter phoneFormatter =
@@ -18,5 +20,20 @@ class MesaUtils {
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         fontSize: 16.0);
+  }
+
+  static String dateFormatWithUpdate(DateTime date) {
+    return DateFormat("dd/MM/yyyy").format(date) +
+        " Atualizado em " +
+        DateFormat("dd/MM/yyyy kk:mm").format(date);
+  }
+
+  static String dateTimeDifference(DateTime date) {
+    final difference = date.difference(DateTime.now());
+    if (difference.inHours >= 24) {
+      return difference.inHours.abs().toString() + " horas atrás";
+    } else {
+      return difference.inDays.abs().toString() + " dias atrás";
+    }
   }
 }

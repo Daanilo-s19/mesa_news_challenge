@@ -69,6 +69,36 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$filterPerDateAtom = Atom(name: '_HomeControllerBase.filterPerDate');
+
+  @override
+  DateTime get filterPerDate {
+    _$filterPerDateAtom.reportRead();
+    return super.filterPerDate;
+  }
+
+  @override
+  set filterPerDate(DateTime value) {
+    _$filterPerDateAtom.reportWrite(value, super.filterPerDate, () {
+      super.filterPerDate = value;
+    });
+  }
+
+  final _$contextAtom = Atom(name: '_HomeControllerBase.context');
+
+  @override
+  BuildContext get context {
+    _$contextAtom.reportRead();
+    return super.context;
+  }
+
+  @override
+  set context(BuildContext value) {
+    _$contextAtom.reportWrite(value, super.context, () {
+      super.context = value;
+    });
+  }
+
   final _$getNewsAsyncAction = AsyncAction('_HomeControllerBase.getNews');
 
   @override
@@ -82,6 +112,15 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   Future getNewsHighlight() {
     return _$getNewsHighlightAsyncAction.run(() => super.getNewsHighlight());
+  }
+
+  final _$showDateTimePickerAsyncAction =
+      AsyncAction('_HomeControllerBase.showDateTimePicker');
+
+  @override
+  Future showDateTimePicker() {
+    return _$showDateTimePickerAsyncAction
+        .run(() => super.showDateTimePicker());
   }
 
   final _$_HomeControllerBaseActionController =
@@ -110,6 +149,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  bool getFilterNews({News value, DateTime dateTime, bool fav}) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.getFilterNews');
+    try {
+      return super.getFilterNews(value: value, dateTime: dateTime, fav: fav);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic cleanFilter() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.cleanFilter');
+    try {
+      return super.cleanFilter();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic toogleFavorite(bool value) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.toogleFavorite');
@@ -126,7 +187,9 @@ mixin _$HomeController on _HomeControllerBase, Store {
 loading: ${loading},
 isFavorite: ${isFavorite},
 news: ${news},
-newshighlights: ${newshighlights}
+newshighlights: ${newshighlights},
+filterPerDate: ${filterPerDate},
+context: ${context}
     ''';
   }
 }

@@ -20,7 +20,11 @@ class ApiDataSource implements HomeDataSource {
         published: published,
       );
       List decode = response.data["data"];
-      return decode.map((e) => NewsModel.fromMap(e)).toList();
+      return decode
+          .asMap()
+          .entries
+          .map((e) => NewsModel.fromMap(e.value, id: e.key))
+          .toList();
     } on DioError catch (ex, s) {
       print('ex -> $ex, stack -> $s');
       throw FailureGetNews(message: ex.response.data["message"]);
@@ -32,7 +36,11 @@ class ApiDataSource implements HomeDataSource {
     try {
       final response = await appController.apiService.fetchNewsHighlights();
       List decode = response.data["data"];
-      return decode.map((e) => NewsModel.fromMap(e)).toList();
+      return decode
+          .asMap()
+          .entries
+          .map((e) => NewsModel.fromMap(e.value, id: e.key))
+          .toList();
     } on DioError catch (ex, s) {
       print('ex -> $ex, stack -> $s');
       throw FailureGetNews(message: ex.response.data["message"]);

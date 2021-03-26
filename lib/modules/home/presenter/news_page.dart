@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/presenter/controller/home_controller.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
+import 'package:mesa_news_challenge/utils/mesa_utils.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_last_news_widget.dart';
 
@@ -72,7 +73,8 @@ class _NewsPageState extends State<NewsPage> {
                   isbookmark: _news.favorite,
                   onChanged: () => _onChanged(),
                   content: widget.news.content,
-                  dateTime: "2 horas atrás",
+                  dateTime:
+                      MesaUtils.dateFormatWithUpdate(widget.news.published),
                 ),
               ),
             ],

@@ -6,11 +6,11 @@ import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dar
 import 'package:mesa_news_challenge/modules/home/presenter/news_page.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
+import 'package:mesa_news_challenge/utils/mesa_utils.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/button/icon_button_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_last_news_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_trend_widget.dart';
-import 'package:mobx/mobx.dart';
 
 import 'controller/home_controller.dart';
 
@@ -33,69 +33,103 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       );
   List<Widget> _renderNewsHighlight({List<News> newsHighlight}) {
+    final emptyFilter = !newsHighlight.any(
+      (item) => controller.getFilterNews(
+          value: item,
+          dateTime: controller.filterPerDate,
+          fav: controller.isFavorite),
+    );
+
     if (newsHighlight.isEmpty) {
       return [
-        Text("Parece que não temos notícias em destaque :("),
+        Center(child: Text("Parece que não temos notícias em destaque :(")),
       ];
     }
-    return newsHighlight
-        .map(
-          (item) => item.highlight
-              ? Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 16),
-                      child: MesaCardTrendWidget(
-                        imagePath: item.imageUrl,
-                        title: item.title,
-                        dateTime: "2 horas atrás",
-                        isbookmark: item.favorite,
-                        isShow: controller.isFavorite ? item.favorite : true,
-                        onChanged: () => controller.setFavoriteHighlight(item),
-                        onTap: () =>
-                            _redirectToNewPage(item: item, title: "Destaques"),
-                      ),
-                    ),
-                    Divider(color: MesaColorsGuide.GRAY03, height: 1),
-                  ],
-                )
-              : SizedBox(),
-        )
-        .toList();
+    if (emptyFilter) {
+      return [
+        Center(child: Text("Não há resultado para este filtro :(")),
+      ];
+    }
+    return newsHighlight.map((item) {
+      final isShow = controller.getFilterNews(
+              value: item,
+              dateTime: controller.filterPerDate,
+              fav: controller.isFavorite) &&
+          item.highlight;
+
+      return isShow
+          ? Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 16),
+                  child: MesaCardTrendWidget(
+                    imagePath: item.imageUrl,
+                    title: item.title,
+                    dateTime: MesaUtils.dateTimeDifference(item.published),
+                    isbookmark: item.favorite,
+                    isShow: controller.isFavorite ? item.favorite : true,
+                    onChanged: () => controller.setFavoriteHighlight(item),
+                    onTap: () =>
+                        _redirectToNewPage(item: item, title: "Destaques"),
+                  ),
+                ),
+                Divider(color: MesaColorsGuide.GRAY03, height: 1),
+              ],
+            )
+          : SizedBox();
+    }).toList();
   }
 
   List<Widget> _renderNews({List<News> news}) {
+    final emptyFilter = !news.any(
+      (item) => controller.getFilterNews(
+        value: item,
+        dateTime: controller.filterPerDate,
+        fav: controller.isFavorite,
+      ),
+    );
     if (news.isEmpty) {
       return [
-        Text("Parece que ainda não temos nenhuma notícias para exibir :("),
+        Center(
+            child: Text(
+                "Parece que ainda não temos nenhuma notícias para exibir :(")),
       ];
     }
 
-    return controller.news
-        .map(
-          (item) => item.highlight
-              ? Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(16),
-                      child: MesaCardLastNewsWidget(
-                        imagePath: item.imageUrl,
-                        title: item.title,
-                        description: item.description,
-                        onTap: () => _redirectToNewPage(
-                            item: item, title: "Últimas notícias"),
-                        isbookmark: item.favorite,
-                        isShow: controller.isFavorite ? item.favorite : true,
-                        onChanged: () => controller.setFavoriteNews(item),
-                        dateTime: item.published.toIso8601String(),
-                      ),
-                    ),
-                    Divider(color: MesaColorsGuide.GRAY03, height: 1),
-                  ],
-                )
-              : SizedBox(),
-        )
-        .toList();
+    if (emptyFilter) {
+      return [
+        Center(child: Text("Não há resultado para este filtro :(")),
+      ];
+    }
+
+    return controller.news.map((item) {
+      final isShow = controller.getFilterNews(
+        value: item,
+        dateTime: controller.filterPerDate,
+        fav: controller.isFavorite,
+      );
+
+      return isShow
+          ? Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(16),
+                  child: MesaCardLastNewsWidget(
+                    imagePath: item.imageUrl,
+                    title: item.title,
+                    description: item.description,
+                    onTap: () => _redirectToNewPage(
+                        item: item, title: "Últimas notícias"),
+                    isbookmark: item.favorite,
+                    onChanged: () => controller.setFavoriteNews(item),
+                    dateTime: MesaUtils.dateTimeDifference(item.published),
+                  ),
+                ),
+                Divider(color: MesaColorsGuide.GRAY03, height: 1),
+              ],
+            )
+          : SizedBox();
+    }).toList();
   }
 
   Widget _render() {

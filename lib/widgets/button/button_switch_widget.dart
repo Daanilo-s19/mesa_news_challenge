@@ -12,23 +12,10 @@ class MesaSwitchButtonWidget extends StatefulWidget {
 }
 
 class _MesaSwitchButtonWidgetState extends State<MesaSwitchButtonWidget> {
-  bool value;
-
-  @override
-  void initState() {
-    super.initState();
-    value = widget.value;
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          value = !value;
-        });
-        widget.onChanged(value);
-      },
+      onTap: () => widget.onChanged(!widget.value),
       //TODO: definir curvas da animações
       child: AnimatedContainer(
         width: 51,
@@ -36,7 +23,7 @@ class _MesaSwitchButtonWidgetState extends State<MesaSwitchButtonWidget> {
         padding: EdgeInsets.all(1),
         duration: Duration(milliseconds: 500),
         decoration: BoxDecoration(
-          color: value ? MesaColorsGuide.SUCCESS : Colors.white,
+          color: widget.value ? MesaColorsGuide.SUCCESS : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             width: 1.5,
@@ -45,7 +32,8 @@ class _MesaSwitchButtonWidgetState extends State<MesaSwitchButtonWidget> {
         ),
         child: AnimatedAlign(
           duration: Duration(milliseconds: 250),
-          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+          alignment:
+              widget.value ? Alignment.centerRight : Alignment.centerLeft,
           child: AnimatedContainer(
             duration: Duration(milliseconds: 500),
             width: 28,

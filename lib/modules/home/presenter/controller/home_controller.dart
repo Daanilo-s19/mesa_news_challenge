@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:mesa_news_challenge/modules/home/data/models/news_model.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_highlight_usecase.dart';
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_usecase.dart';
 import 'package:mobx/mobx.dart';
+import 'package:intl/intl.dart';
+
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
@@ -23,7 +26,10 @@ abstract class _HomeControllerBase with Store {
   ObservableList<News> news = ObservableList<News>();
   @observable
   ObservableList<News> newshighlights = ObservableList<News>();
-
+  @observable
+  DateTime filterPerDate;
+  @observable
+  BuildContext context;
   @action
   getNews() async {
     loading = true;
@@ -54,7 +60,7 @@ abstract class _HomeControllerBase with Store {
 
   @action
   setFavoriteNews(NewsModel item) {
-    news.removeWhere((e) => e.title == item.title);
+    news.removeWhere((e) => e.id == item.id);
     final changed = item.copyWith(favorite: !item.favorite);
     news.add(changed);
     setOrdering(news);
@@ -62,10 +68,43 @@ abstract class _HomeControllerBase with Store {
 
   @action
   setFavoriteHighlight(NewsModel item) {
-    newshighlights.removeWhere((e) => e.title == item.title);
+    newshighlights.removeWhere((e) => e.id == item.id);
     final changed = item.copyWith(favorite: !item.favorite);
     newshighlights.add(changed);
     setOrdering(newshighlights);
+  }
+
+  @action
+  bool getFilterNews({News value, DateTime dateTime, bool fav}) {
+    if (fav && dateTime != null) {
+      return DateFormat.yMMMd()
+                  .format(dateTime)
+                  .compareTo(DateFormat.yMMMd().format(value.published)) ==
+              0 &&
+          value.favorite;
+    }
+    if (dateTime != null) {
+      return DateFormat.yMMMd()
+              .format(dateTime)
+              .compareTo(DateFormat.yMMMd().format(value.published)) ==
+          0;
+    } else {
+      return fav ? value.favorite : true;
+    }
+  }
+
+  @action
+  showDateTimePicker() async => filterPerDate = await showDatePicker(
+        context: context,
+        initialDate: filterPerDate ?? DateTime.now(),
+        firstDate: new DateTime(1960),
+        lastDate: DateTime.now(),
+      );
+
+  @action
+  cleanFilter() {
+    filterPerDate = null;
+    isFavorite = false;
   }
 
   List<News> setOrdering(List<News> order) {
