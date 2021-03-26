@@ -15,6 +15,9 @@ class SigninUserUseCaseImpl implements SigninUserUseCase {
 
   @override
   Future<Either<FailureSignin, User>> call(Signin user) async {
+    if (user == null || user.email == null || user.password == null) {
+      return Left(FailureSignin());
+    }
     return repository.signin(user);
   }
 }

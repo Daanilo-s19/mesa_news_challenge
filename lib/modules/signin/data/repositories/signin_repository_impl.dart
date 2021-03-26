@@ -12,6 +12,9 @@ class SigninRepositoryImpl implements SigninRepository {
 
   @override
   Future<Either<FailureSignin, User>> signin(Signin user) async {
+    if (user == null || user.email == null || user.password == null) {
+      return Left(FailureSignin());
+    }
     try {
       final result = await dataSource.signin(user);
       return Right(result);

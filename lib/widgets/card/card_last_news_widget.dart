@@ -42,11 +42,23 @@ class _MesaCardLastNewsWidgetState extends State<MesaCardLastNewsWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // FadeInImage.assetNetwork(image: widget.imagePath,placeholder: , )
             Image.network(
               widget.imagePath,
               height: 128,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                  ),
+                );
+              },
+              errorBuilder: (context, error, stackTrace) =>
+                  Text('Some errors occurred!'),
             ),
             Container(
               margin: EdgeInsets.only(top: 8),

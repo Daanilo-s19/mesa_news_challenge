@@ -12,6 +12,12 @@ class SignupRepositoryImpl implements SignupRepository {
 
   @override
   Future<Either<FailureSignup, User>> signup(Signup user) async {
+    if (user == null ||
+        user.name == null ||
+        user.password == null ||
+        user.email == null) {
+      return Left(FailureSignup());
+    }
     try {
       final result = await dataSource.signup(user);
       return Right(result);
