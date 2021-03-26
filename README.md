@@ -15,3 +15,13 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+
+
+proximos passos
+- [] Criação do login com facebook
+- [x] feat marcar como favorito
+- [] compartilhar noticia
+- [x] filtrar noticiar
+- [x] verificar se a appbar nao quebrou
+- [] criar testes automatizados
+- [x] logica de data atrás

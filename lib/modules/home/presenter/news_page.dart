@@ -8,6 +8,7 @@ import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/utils/mesa_utils.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_last_news_widget.dart';
+import 'package:share/share.dart';
 
 class NewsPage extends StatefulWidget {
   final News news;
@@ -30,9 +31,8 @@ class _NewsPageState extends State<NewsPage> {
   void _setNews() {
     _news = widget.title == "Destaques"
         ? controller.newshighlights
-            .firstWhere((element) => element.title == widget.news.title)
-        : controller.news
-            .firstWhere((element) => element.title == widget.news.title);
+            .firstWhere((element) => element.id == widget.news.id)
+        : controller.news.firstWhere((element) => element.id == widget.news.id);
   }
 
   _onChanged() {
@@ -56,7 +56,8 @@ class _NewsPageState extends State<NewsPage> {
           sufix: IconButton(
             icon: SvgPicture.asset("assets/more.svg"),
             tooltip: 'more',
-            onPressed: () {},
+            onPressed: () => Share.share(widget.news.title,
+                subject: widget.news.description),
           ),
         ),
       ),
