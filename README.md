@@ -20,8 +20,9 @@ samples, guidance on mobile development, and a full API reference.
 proximos passos
 - [] Criação do login com facebook
 - [x] feat marcar como favorito
-- [] compartilhar noticia
+- [x] compartilhar noticia
 - [x] filtrar noticiar
 - [x] verificar se a appbar nao quebrou
 - [] criar testes automatizados
 - [x] logica de data atrás
+- [] adicionar parametros de chamada news

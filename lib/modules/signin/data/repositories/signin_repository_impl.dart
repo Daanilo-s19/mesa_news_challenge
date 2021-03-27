@@ -11,12 +11,22 @@ class SigninRepositoryImpl implements SigninRepository {
   SigninRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<FailureSignin, User>> signin(Signin user) async {
+  Future<Either<FailureSignin, UserMesa>> signin(Signin user) async {
     if (user == null || user.email == null || user.password == null) {
       return Left(FailureSignin());
     }
     try {
       final result = await dataSource.signin(user);
+      return Right(result);
+    } on FailureSignin catch (e) {
+      return Left(FailureSignin(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<FailureSignin, UserMesa>> signinWithFacebook() async {
+    try {
+      final result = await dataSource.signinWithFacebook();
       return Right(result);
     } on FailureSignin catch (e) {
       return Left(FailureSignin(message: e.message));

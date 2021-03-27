@@ -27,7 +27,7 @@ dependencies:
   flutter_modular: ^2.0.1
   flutter_svg: ^0.19.1
   flutter_screenutil: ^4.0.3+1
-  flutter_mobx: ^1.1.0
+  flutter_mobx: ^1.1.0+2
   mobx: ^1.2.1
   dartz: null
   dio: ^3.0.10
@@ -36,6 +36,9 @@ dependencies:
   fluttertoast: ^7.0.2
   shared_preferences: ^0.5.12+2
   share: ^0.6.5+4
+  firebase_core: ^0.7.0
+  flutter_facebook_login: ^3.0.0
+  firebase_auth: ^0.20.1
 
 
  

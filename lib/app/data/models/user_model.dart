@@ -2,22 +2,22 @@ import 'dart:convert';
 
 import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 
-class UserModel extends User {
-  UserModel(
+class UserMesaModel extends UserMesa {
+  UserMesaModel({
     String name,
     String email,
     String token,
-  ) : super(email: email, name: name, token: token);
+  }) : super(email: email, name: name, token: token);
 
-  UserModel copyWith({
+  UserMesaModel copyWith({
     String name,
     String email,
     String token,
   }) {
-    return UserModel(
-      name ?? this.name,
-      email ?? this.email,
-      token ?? this.token,
+    return UserMesaModel(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      token: token ?? this.token,
     );
   }
 
@@ -29,18 +29,18 @@ class UserModel extends User {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      map['name'],
-      map['email'],
-      map['token'],
+  factory UserMesaModel.fromMap(Map<String, dynamic> map) {
+    return UserMesaModel(
+      name: map['name'],
+      email: map['email'],
+      token: map['token'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
+  factory UserMesaModel.fromJson(String source) =>
+      UserMesaModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'UserModel(name: $name, email: $email, token: $token)';
@@ -49,7 +49,7 @@ class UserModel extends User {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is UserModel &&
+    return other is UserMesaModel &&
         other.name == name &&
         other.email == email &&
         other.token == token;

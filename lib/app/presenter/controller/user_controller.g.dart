@@ -12,13 +12,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$userAtom = Atom(name: '_UserControllerBase.user');
 
   @override
-  UserModel get user {
+  UserMesaModel get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(UserModel value) {
+  set user(UserMesaModel value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -28,7 +28,7 @@ mixin _$UserController on _UserControllerBase, Store {
       AsyncAction('_UserControllerBase.setUserData');
 
   @override
-  Future setUserData(UserModel value) {
+  Future setUserData(UserMesaModel value) {
     return _$setUserDataAsyncAction.run(() => super.setUserData(value));
   }
 

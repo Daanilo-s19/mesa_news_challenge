@@ -11,7 +11,7 @@ class SignupRepositoryImpl implements SignupRepository {
   SignupRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<FailureSignup, User>> signup(Signup user) async {
+  Future<Either<FailureSignup, UserMesa>> signup(Signup user) async {
     if (user == null ||
         user.name == null ||
         user.password == null ||

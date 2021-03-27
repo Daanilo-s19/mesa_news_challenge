@@ -4,5 +4,6 @@ import 'package:mesa_news_challenge/modules/signin/domain/entities/signin_entity
 import 'package:mesa_news_challenge/modules/signin/domain/errors/errors.dart';
 
 abstract class SigninRepository {
-  Future<Either<FailureSignin, User>> signin(Signin user);
+  Future<Either<FailureSignin, UserMesa>> signin(Signin user);
+  Future<Either<FailureSignin, UserMesa>> signinWithFacebook();
 }

@@ -54,12 +54,36 @@ mixin _$SigninController on _SigninControllerBase, Store {
     });
   }
 
+  final _$loadingFbAtom = Atom(name: '_SigninControllerBase.loadingFb');
+
+  @override
+  bool get loadingFb {
+    _$loadingFbAtom.reportRead();
+    return super.loadingFb;
+  }
+
+  @override
+  set loadingFb(bool value) {
+    _$loadingFbAtom.reportWrite(value, super.loadingFb, () {
+      super.loadingFb = value;
+    });
+  }
+
   final _$signinUserAsyncAction =
       AsyncAction('_SigninControllerBase.signinUser');
 
   @override
   Future signinUser() {
     return _$signinUserAsyncAction.run(() => super.signinUser());
+  }
+
+  final _$signinWithFacebookAsyncAction =
+      AsyncAction('_SigninControllerBase.signinWithFacebook');
+
+  @override
+  Future signinWithFacebook() {
+    return _$signinWithFacebookAsyncAction
+        .run(() => super.signinWithFacebook());
   }
 
   final _$_SigninControllerBaseActionController =
@@ -81,7 +105,8 @@ mixin _$SigninController on _SigninControllerBase, Store {
     return '''
 user: ${user},
 isFormError: ${isFormError},
-loading: ${loading}
+loading: ${loading},
+loadingFb: ${loadingFb}
     ''';
   }
 }

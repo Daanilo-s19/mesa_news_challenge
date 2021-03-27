@@ -84,7 +84,12 @@ class _SigninPageState extends ModularState<SigninPage, SigninController> {
                           .copyWith(color: MesaColorsGuide.PRIMARY),
                       border:
                           BorderSide(width: 1, color: MesaColorsGuide.PRIMARY),
-                      onPressed: () {},
+                      type: controller.loadingFb
+                          ? MesaButtonType.LOADING
+                          : MesaButtonType.PRIMARY,
+                      onPressed: !controller.loadingFb
+                          ? controller.signinWithFacebook
+                          : () {},
                     ),
                   ),
                   MesaFooterDefaultWidget(

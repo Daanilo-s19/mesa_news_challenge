@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mesa_news_challenge/app/presenter/controller/user_controller.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/presenter/news_page.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  final userController = Modular.get<UserController>();
   void _redirectToNewPage({News item, String title = ""}) => Modular.to.push(
         MaterialPageRoute(
           builder: (context) => NewsPage(
@@ -175,7 +177,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         preferredSize: const Size.fromHeight(44),
         child: MesaAppBarDefaultWidget(
           title: "Mesa News",
-          prefix: SizedBox(),
+          prefix: IconButton(
+              color: MesaColorsGuide.GRAY01,
+              icon: Icon(
+                Icons.power_settings_new,
+                color: MesaColorsGuide.GRAY01,
+              ),
+              onPressed: () => userController.logOutUser()),
           sufix: IconButton(
             icon: SvgPicture.asset("assets/filter.svg"),
             tooltip: 'Filter',

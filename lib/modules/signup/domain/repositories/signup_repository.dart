@@ -4,5 +4,5 @@ import 'package:mesa_news_challenge/modules/signup/domain/entities/signup_entity
 import 'package:mesa_news_challenge/modules/signup/domain/errors/errors.dart';
 
 abstract class SignupRepository {
-  Future<Either<FailureSignup, User>> signup(Signup user);
+  Future<Either<FailureSignup, UserMesa>> signup(Signup user);
 }

@@ -15,38 +15,38 @@ void main() {
   group('Should return User ', () {
     test('- sign ', () async {
       when(dataSource.signin(any)).thenAnswer(
-        (_) async => User(),
+        (_) async => UserMesa(),
       );
       final result = await repository.signin(Signin(email: "", password: ""));
       expect(result, isA<Right>());
-      expect(result | null, isA<User>());
+      expect(result | null, isA<UserMesa>());
     });
   });
   group('Should return FailureSignin ', () {
     test('- sign class params empty ', () async {
       when(dataSource.signin(any)).thenAnswer(
-        (_) async => User(),
+        (_) async => UserMesa(),
       );
       final result = await repository.signin(Signin());
       expect(result, isA<Left>());
     });
     test('- sign is null ', () async {
       when(dataSource.signin(any)).thenAnswer(
-        (_) async => User(),
+        (_) async => UserMesa(),
       );
       final result = await repository.signin(null);
       expect(result, isA<Left>());
     });
     test('- email is null ', () async {
       when(dataSource.signin(any)).thenAnswer(
-        (_) async => User(),
+        (_) async => UserMesa(),
       );
       final result = await repository.signin(Signin(password: ""));
       expect(result, isA<Left>());
     });
     test('- password is null ', () async {
       when(dataSource.signin(any)).thenAnswer(
-        (_) async => User(),
+        (_) async => UserMesa(),
       );
       final result = await repository.signin(Signin(email: ""));
       expect(result, isA<Left>());

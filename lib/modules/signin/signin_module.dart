@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/modules/signin/data/repositories/signin_repository_impl.dart';
 import 'package:mesa_news_challenge/modules/signin/domain/usecases/signin_user_usecase.dart';
+import 'package:mesa_news_challenge/modules/signin/domain/usecases/signin_with_facebook_usecase.dart';
 import 'package:mesa_news_challenge/modules/signin/presenter/signin_page.dart';
 
 import 'presenter/controller/signin_controller.dart';
@@ -12,7 +13,8 @@ class SigninModule extends ChildModule {
         Bind((i) => ApiDataSource(i())),
         Bind((i) => SigninRepositoryImpl(i())),
         Bind((i) => SigninUserUseCaseImpl(i())),
-        Bind((i) => SigninController(i(), i())),
+        Bind((i) => SigninWithFacebookUsecaseImpl(i())),
+        Bind((i) => SigninController(i(), i(), i())),
       ];
 
   @override

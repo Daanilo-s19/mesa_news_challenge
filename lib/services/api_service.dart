@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
@@ -67,6 +68,21 @@ class ApiService {
   Future<Response> signupUser(SignupModel user) async {
     String uri = _generateURI('auth/signup');
     return _dio.post(uri, data: user.toJson());
+  }
+
+  //TODO: Não é o correto a se fazer
+  Future<Response> loginSocialMedia(SigninModel user, {User userAuth}) async {
+    final responseSignin = await signinUser(user);
+    if (responseSignin.statusCode != 200) {
+      final response = await signupUser(SignupModel(
+        name: userAuth.displayName,
+        email: userAuth.email,
+        password: userAuth.uid,
+      ));
+      return response;
+    } else {
+      return responseSignin;
+    }
   }
 
   Future<Response> fetchNews({

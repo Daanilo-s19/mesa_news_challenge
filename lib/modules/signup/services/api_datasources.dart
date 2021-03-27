@@ -14,10 +14,10 @@ class ApiDataSource implements SignupDataSource {
   ApiDataSource(this.appController);
 
   @override
-  Future<User> signup(Signup user) async {
+  Future<UserMesa> signup(Signup user) async {
     try {
       final response = await appController.apiService.signupUser(user);
-      return UserModel.fromMap(response.data);
+      return UserMesaModel.fromMap(response.data);
     } on DioError catch (ex, s) {
       print('ex -> $ex, stack -> $s');
       throw FailureSignup(message: ex.response.data["message"]);

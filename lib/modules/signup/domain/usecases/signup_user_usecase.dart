@@ -5,7 +5,7 @@ import 'package:mesa_news_challenge/modules/signup/domain/errors/errors.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/repositories/signup_repository.dart';
 
 abstract class SignupUserUseCase {
-  Future<Either<FailureSignup, User>> call(Signup user);
+  Future<Either<FailureSignup, UserMesa>> call(Signup user);
 }
 
 class SignupUserUseCaseImpl implements SignupUserUseCase {
@@ -14,7 +14,7 @@ class SignupUserUseCaseImpl implements SignupUserUseCase {
   SignupUserUseCaseImpl(this.repository);
 
   @override
-  Future<Either<FailureSignup, User>> call(Signup user) async {
+  Future<Either<FailureSignup, UserMesa>> call(Signup user) async {
     if (user == null ||
         user.name == null ||
         user.password == null ||

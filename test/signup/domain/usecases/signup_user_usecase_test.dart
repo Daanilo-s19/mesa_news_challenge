@@ -17,31 +17,31 @@ main() {
 
   group("Should Return a User", () {
     test('- Success', () async {
-      when(repository.signup(any)).thenAnswer((_) async => Right(User()));
+      when(repository.signup(any)).thenAnswer((_) async => Right(UserMesa()));
       final result = await useCase(Signup(email: "", password: "", name: ""));
       expect(result, isA<Right>());
-      expect(result | null, isA<User>());
+      expect(result | null, isA<UserMesa>());
     });
   });
   group("Should Return a FailureSignin", () {
     test('- class params null', () async {
-      when(repository.signup(any)).thenAnswer((_) async => Right(User()));
+      when(repository.signup(any)).thenAnswer((_) async => Right(UserMesa()));
       final result = await useCase(Signup());
       expect(result, isA<Left>());
     });
 
     test('- SignIn is null', () async {
-      when(repository.signup(any)).thenAnswer((_) async => Right(User()));
+      when(repository.signup(any)).thenAnswer((_) async => Right(UserMesa()));
       final result = await useCase(null);
       expect(result, isA<Left>());
     });
     test('- email is null', () async {
-      when(repository.signup(any)).thenAnswer((_) async => Right(User()));
+      when(repository.signup(any)).thenAnswer((_) async => Right(UserMesa()));
       final result = await useCase(Signup(password: ""));
       expect(result, isA<Left>());
     });
     test('- passowrd is null', () async {
-      when(repository.signup(any)).thenAnswer((_) async => Right(User()));
+      when(repository.signup(any)).thenAnswer((_) async => Right(UserMesa()));
       final result = await useCase(Signup(email: ""));
       expect(result, isA<Left>());
     });

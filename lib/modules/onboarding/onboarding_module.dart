@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mesa_news_challenge/modules/onboarding/presenter/onboarding_controller.dart';
 import 'package:mesa_news_challenge/modules/onboarding/presenter/onboarding_page.dart';
 import 'package:mesa_news_challenge/modules/signin/signin_module.dart';
 import 'package:mesa_news_challenge/modules/signup/signup_module.dart';
@@ -6,6 +7,7 @@ import 'package:mesa_news_challenge/modules/signup/signup_module.dart';
 class OnboardingModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => OnboardingController(i())),
         ...SigninModule().binds,
         ...SignupModule().binds,
       ];

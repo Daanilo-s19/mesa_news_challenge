@@ -1,5 +1,5 @@
-class User {
+class UserMesa {
   final String name, email, token;
 
-  User({this.name, this.email, this.token});
+  UserMesa({this.name, this.email, this.token});
 }
