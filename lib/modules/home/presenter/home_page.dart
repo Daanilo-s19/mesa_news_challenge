@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mesa_news_challenge/app/presenter/controller/user_controller.dart';
+import 'package:mesa_news_challenge/enum/mesa_news_type.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/presenter/news_page.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
@@ -26,11 +27,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   final userController = Modular.get<UserController>();
-  void _redirectToNewPage({News item, String title = ""}) => Modular.to.push(
+  void _redirectToNewPage({News item, MesaNewsType type = MesaNewsType.NEWS}) =>
+      Modular.to.push(
         MaterialPageRoute(
           builder: (context) => NewsPage(
             news: item,
-            title: title,
+            type: type,
           ),
         ),
       );
@@ -69,10 +71,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     title: item.title,
                     dateTime: MesaUtils.dateTimeDifference(item.published),
                     isbookmark: item.favorite,
-                    isShow: controller.isFavorite ? item.favorite : true,
                     onChanged: () => controller.setFavoriteHighlight(item),
-                    onTap: () =>
-                        _redirectToNewPage(item: item, title: "Destaques"),
+                    onTap: () => _redirectToNewPage(
+                        item: item, type: MesaNewsType.NEWSHIGHLIGHT),
                   ),
                 ),
                 Divider(color: MesaColorsGuide.GRAY03, height: 1),
@@ -120,8 +121,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     imagePath: item.imageUrl,
                     title: item.title,
                     description: item.description,
-                    onTap: () => _redirectToNewPage(
-                        item: item, title: "Últimas notícias"),
+                    onTap: () =>
+                        _redirectToNewPage(item: item, type: MesaNewsType.NEWS),
                     isbookmark: item.favorite,
                     onChanged: () => controller.setFavoriteNews(item),
                     dateTime: MesaUtils.dateTimeDifference(item.published),
@@ -147,7 +148,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         children: [
           Container(
             margin: EdgeInsets.only(top: 24, bottom: 16, left: 16),
-            child: Text("Destaques", style: MesaTextStyleGuide.subtitle01),
+            child: Text(MesaNewsType.NEWSHIGHLIGHT.string,
+                style: MesaTextStyleGuide.subtitle01),
           ),
           Container(
             height: 128,
@@ -160,8 +162,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           ),
           Container(
             margin: EdgeInsets.only(top: 40, bottom: 2, left: 16),
-            child:
-                Text("Últimas notícias", style: MesaTextStyleGuide.subtitle01),
+            child: Text(MesaNewsType.NEWS.string,
+                style: MesaTextStyleGuide.subtitle01),
           ),
           ..._renderNews(news: controller.news),
         ],

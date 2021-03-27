@@ -1,5 +1,4 @@
 class News {
-  final int id;
   final String title;
   final String description;
   final String author;
@@ -11,8 +10,7 @@ class News {
   final String imageUrl;
 
   News(
-      {this.id,
-      this.favorite = false,
+      {this.favorite = false,
       this.title,
       this.description,
       this.author,

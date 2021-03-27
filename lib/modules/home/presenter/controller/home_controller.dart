@@ -61,7 +61,7 @@ abstract class _HomeControllerBase with Store {
 
   @action
   setFavoriteNews(NewsModel item) {
-    news.removeWhere((e) => e.id == item.id);
+    news.removeWhere((e) => e.title == item.title);
     final changed = item.copyWith(favorite: !item.favorite);
     news.add(changed);
     setOrdering(news);
@@ -69,15 +69,21 @@ abstract class _HomeControllerBase with Store {
 
   @action
   setFavoriteHighlight(NewsModel item) {
-    newshighlights.removeWhere((e) => e.id == item.id);
+    newshighlights.removeWhere((e) => e.title == item.title);
     final changed = item.copyWith(favorite: !item.favorite);
     newshighlights.add(changed);
     setOrdering(newshighlights);
   }
 
   @action
+  setFilterNews({bool fav, DateTime dateTime}) {
+    isFavorite = fav;
+    filterPerDate = dateTime;
+  }
+
+  @action
   bool getFilterNews({News value, DateTime dateTime, bool fav}) {
-    if (fav && dateTime != null) {
+    if (isFavorite && dateTime != null) {
       return DateFormat.yMMMd()
                   .format(dateTime)
                   .compareTo(DateFormat.yMMMd().format(value.published)) ==
@@ -90,17 +96,9 @@ abstract class _HomeControllerBase with Store {
               .compareTo(DateFormat.yMMMd().format(value.published)) ==
           0;
     } else {
-      return fav ? value.favorite : true;
+      return isFavorite ? value.favorite : true;
     }
   }
-
-  @action
-  showDateTimePicker() async => filterPerDate = await showDatePicker(
-        context: context,
-        initialDate: filterPerDate ?? DateTime.now(),
-        firstDate: new DateTime(1960),
-        lastDate: DateTime.now(),
-      );
 
   @action
   cleanFilter() {
@@ -127,7 +125,4 @@ abstract class _HomeControllerBase with Store {
     });
     return order;
   }
-
-  @action
-  toogleFavorite(bool value) => isFavorite = value;
 }

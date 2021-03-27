@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mesa_news_challenge/enum/mesa_news_type.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/presenter/controller/home_controller.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
@@ -12,8 +13,8 @@ import 'package:share/share.dart';
 
 class NewsPage extends StatefulWidget {
   final News news;
-  final String title;
-  NewsPage({Key key, this.news, this.title}) : super(key: key);
+  final MesaNewsType type;
+  NewsPage({Key key, this.news, this.type}) : super(key: key);
 
   @override
   _NewsPageState createState() => _NewsPageState();
@@ -29,14 +30,15 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   void _setNews() {
-    _news = widget.title == "Destaques"
+    _news = widget.type == MesaNewsType.NEWSHIGHLIGHT
         ? controller.newshighlights
-            .firstWhere((element) => element.id == widget.news.id)
-        : controller.news.firstWhere((element) => element.id == widget.news.id);
+            .firstWhere((element) => element.title == widget.news.title)
+        : controller.news
+            .firstWhere((element) => element.title == widget.news.title);
   }
 
   _onChanged() {
-    widget.title == "Destaques"
+    widget.type == MesaNewsType.NEWSHIGHLIGHT
         ? controller.setFavoriteHighlight(_news)
         : controller.setFavoriteNews(_news);
   }
@@ -47,7 +49,7 @@ class _NewsPageState extends State<NewsPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(44),
         child: MesaAppBarDefaultWidget(
-          title: widget.title,
+          title: widget.type.string,
           subtitle: widget.news.url,
           textStyle: MesaTextStyleGuide.heading05.copyWith(
               color: Colors.white,

@@ -3,7 +3,6 @@ import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dar
 
 class NewsModel extends News {
   NewsModel({
-    int id,
     String title,
     String description,
     String author,
@@ -14,7 +13,6 @@ class NewsModel extends News {
     String url,
     String imageUrl,
   }) : super(
-          id: id,
           title: title,
           description: description,
           author: author,
@@ -27,7 +25,6 @@ class NewsModel extends News {
         );
 
   NewsModel copyWith({
-    int id,
     String title,
     String description,
     String author,
@@ -39,7 +36,6 @@ class NewsModel extends News {
     String imageUrl,
   }) {
     return NewsModel(
-      id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
       author: author ?? this.author,
@@ -54,7 +50,6 @@ class NewsModel extends News {
 
   Map<String, dynamic> toMap() {
     return {
-      "id": id,
       'title': title,
       'description': description,
       'author': author,
@@ -71,16 +66,14 @@ class NewsModel extends News {
     if (map == null) return null;
 
     return NewsModel(
-      id: id,
       favorite: map["favorite"] ?? false,
       title: map['title'],
       description: map['description'],
       author: map['author'],
       content: map['content'],
-      published: DateTime.now().add(Duration(days: -id)),
-      // published: map['published_at'] != null
-      //     ? DateTime.parse(map['published_at'])
-      //     : null,
+      published: map['published_at'] != null
+          ? DateTime.parse(map['published_at'])
+          : null,
       highlight: map['highlight'],
       url: map['url'],
       imageUrl: map['image_url'],
@@ -94,7 +87,7 @@ class NewsModel extends News {
 
   @override
   String toString() {
-    return 'NewsModel(id:$id,title: $title, description: $description, author: $author, content: $content, published: $published, highlight: $highlight,favorite: $favorite, url: $url, imageUrl: $imageUrl)';
+    return 'NewsModel(title: $title, description: $description, author: $author, content: $content, published: $published, highlight: $highlight,favorite: $favorite, url: $url, imageUrl: $imageUrl)';
   }
 
   @override
@@ -102,7 +95,6 @@ class NewsModel extends News {
     if (identical(this, other)) return true;
 
     return other is NewsModel &&
-        other.id == id &&
         other.title == title &&
         other.favorite == favorite &&
         other.description == description &&
@@ -116,8 +108,7 @@ class NewsModel extends News {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        title.hashCode ^
+    return title.hashCode ^
         description.hashCode ^
         author.hashCode ^
         content.hashCode ^

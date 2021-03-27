@@ -114,15 +114,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getNewsHighlightAsyncAction.run(() => super.getNewsHighlight());
   }
 
-  final _$showDateTimePickerAsyncAction =
-      AsyncAction('_HomeControllerBase.showDateTimePicker');
-
-  @override
-  Future showDateTimePicker() {
-    return _$showDateTimePickerAsyncAction
-        .run(() => super.showDateTimePicker());
-  }
-
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -149,6 +140,17 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  dynamic setFilterNews({bool fav, DateTime dateTime}) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setFilterNews');
+    try {
+      return super.setFilterNews(fav: fav, dateTime: dateTime);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   bool getFilterNews({News value, DateTime dateTime, bool fav}) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.getFilterNews');
@@ -165,17 +167,6 @@ mixin _$HomeController on _HomeControllerBase, Store {
         name: '_HomeControllerBase.cleanFilter');
     try {
       return super.cleanFilter();
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic toogleFavorite(bool value) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.toogleFavorite');
-    try {
-      return super.toogleFavorite(value);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
