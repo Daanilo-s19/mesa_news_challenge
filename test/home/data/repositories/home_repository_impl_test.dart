@@ -1,13 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/modules/home/data/datasources/home_datasources.dart';
 import 'package:mesa_news_challenge/modules/home/data/repositories/home_repository_impl.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
-import 'package:mesa_news_challenge/modules/home/domain/errors/errors.dart';
-import 'package:mesa_news_challenge/modules/signin/data/datasources/signin_datasources.dart';
-import 'package:mesa_news_challenge/modules/signin/data/repositories/signin_repository_impl.dart';
-import 'package:mesa_news_challenge/modules/signin/domain/entities/signin_entity.dart';
 import 'package:mockito/mockito.dart';
 
 class SigninDataSoureMock extends Mock implements HomeDataSource {}

@@ -16,7 +16,6 @@ class _MesaSwitchButtonWidgetState extends State<MesaSwitchButtonWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => widget.onChanged(!widget.value),
-      //TODO: definir curvas da animações
       child: AnimatedContainer(
         width: 51,
         height: 31,

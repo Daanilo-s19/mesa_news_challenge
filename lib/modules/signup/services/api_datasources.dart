@@ -3,10 +3,8 @@ import 'package:mesa_news_challenge/app/data/models/user_model.dart';
 import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
 import 'package:mesa_news_challenge/modules/signup/data/datasources/signup_datasources.dart';
-import 'package:mesa_news_challenge/modules/signup/data/models/signup_model.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/entities/signup_entity.dart';
 import 'package:mesa_news_challenge/modules/signup/domain/errors/errors.dart';
-import 'package:mesa_news_challenge/services/api_service.dart';
 
 class ApiDataSource implements SignupDataSource {
   final AppController appController;

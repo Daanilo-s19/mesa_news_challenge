@@ -10,7 +10,6 @@ import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/utils/mesa_utils.dart';
 import 'package:mesa_news_challenge/widgets/appbar/appbar_default_widget.dart';
-import 'package:mesa_news_challenge/widgets/button/icon_button_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_last_news_widget.dart';
 import 'package:mesa_news_challenge/widgets/card/card_trend_widget.dart';
 

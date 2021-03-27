@@ -1,6 +1,5 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:intl/intl.dart';
 
 class MesaUtils {

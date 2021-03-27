@@ -1,13 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/domain/errors/errors.dart';
 import 'package:mesa_news_challenge/modules/home/domain/repositories/home_repository.dart';
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_highlight_usecase.dart';
-import 'package:mesa_news_challenge/modules/signin/domain/entities/signin_entity.dart';
-import 'package:mesa_news_challenge/modules/signin/domain/repositories/signin_repository.dart';
-import 'package:mesa_news_challenge/modules/signin/domain/usecases/signin_user_usecase.dart';
 import 'package:mockito/mockito.dart';
 
 class HomeRepositoryMock extends Mock implements HomeRepository {}

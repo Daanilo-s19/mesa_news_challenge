@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/app/data/models/user_model.dart';
-import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/services/shared_preferences_services.dart';
 import 'package:mobx/mobx.dart';
 part 'user_controller.g.dart';

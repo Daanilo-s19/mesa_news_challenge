@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:mesa_news_challenge/app/domain/entities/user_entity.dart';
 import 'package:mesa_news_challenge/modules/home/data/datasources/home_datasources.dart';
 import 'package:mesa_news_challenge/modules/home/domain/entities/news_entity.dart';
 import 'package:mesa_news_challenge/modules/home/domain/errors/errors.dart';

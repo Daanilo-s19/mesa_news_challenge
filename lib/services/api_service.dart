@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
-import 'package:mesa_news_challenge/app/presenter/controller/user_controller.dart';
 import 'package:mesa_news_challenge/modules/signin/data/models/signin_model.dart';
 import 'package:mesa_news_challenge/modules/signup/data/models/signup_model.dart';
 

@@ -5,7 +5,6 @@ import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_highli
 import 'package:mesa_news_challenge/modules/home/domain/usecases/get_news_usecase.dart';
 import 'package:mobx/mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
 
 part 'home_controller.g.dart';
 

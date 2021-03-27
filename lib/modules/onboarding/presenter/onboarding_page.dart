@@ -1,14 +1,9 @@
-import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mesa_news_challenge/app/presenter/controller/user_controller.dart';
 import 'package:mesa_news_challenge/enum/mesa_button_type.dart';
 import 'package:mesa_news_challenge/modules/onboarding/presenter/onboarding_controller.dart';
-import 'package:mesa_news_challenge/modules/signin/presenter/controller/signin_controller.dart';
 import 'package:mesa_news_challenge/themes/colors_guide_theme.dart';
 import 'package:mesa_news_challenge/themes/text_style_guide_theme.dart';
 import 'package:mesa_news_challenge/widgets/animation/animation_size_widget.dart';

@@ -9,7 +9,6 @@ import 'package:mesa_news_challenge/modules/signin/data/models/signin_model.dart
 import 'package:mesa_news_challenge/modules/signin/domain/entities/signin_entity.dart';
 import 'package:mesa_news_challenge/modules/signin/domain/errors/errors.dart';
 import 'package:mesa_news_challenge/modules/signup/data/models/signup_model.dart';
-import 'package:mesa_news_challenge/services/api_service.dart';
 
 class ApiDataSource implements SigninDataSource {
   final AppController appController;

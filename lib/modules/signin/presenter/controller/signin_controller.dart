@@ -1,6 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mesa_news_challenge/app/presenter/controller/app_controller.dart';
-import 'package:mesa_news_challenge/app/presenter/controller/user_controller.dart';
 import 'package:mesa_news_challenge/enum/mesa_button_type.dart';
 import 'package:mesa_news_challenge/modules/signin/data/models/signin_model.dart';
 import 'package:mesa_news_challenge/modules/signin/domain/usecases/signin_user_usecase.dart';

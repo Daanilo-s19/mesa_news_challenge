@@ -28,7 +28,6 @@ class _MesaCardLastNewsWidgetState extends State<MesaCardLastNewsWidget> {
   bool isBookmark;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     isBookmark = widget.isbookmark;
   }
