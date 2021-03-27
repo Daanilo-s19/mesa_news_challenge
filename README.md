@@ -79,6 +79,7 @@ O diretório Utils foi criado para reutilizações de funções que podem ser ut
 - **static String dateTimeDifference(DateTime date)** Retorna a diferença entre uma data e o dia atual em string
 ## enum
 Padronização de valores esperado.
+
 **`enum MesaButtonType {PRIMARY, LOADING,  DISABLED,}`**
 
 **`enum MesaNewsType { NEWS, NEWSHIGHLIGHT }`**
@@ -92,88 +93,88 @@ Por padrão todos os widgets iniciam-se com o prefixo *Mesa* e terminam com o su
 ### MesaAnimationSizeWidget
 Widget criado para realizar a animação do tamanho de um child. é recebe como parâmetro.
 
-` class MesaAnimationSizeWidget ...{
+class MesaAnimationSizeWidget ...{
     final Widget child; -> filho que será animado
   final double width, height; -> propriedade que será redimensionada
   final Duration duration; -> duração da animação
-}`
+}
 
 ### MesaAppBarDefaultWidget
 
 Appbar padrão reutilziada em todas as páginas do app. 
 
-`class MesaAppBarDefaultWidget ... {
+class MesaAppBarDefaultWidget ... {
  final String title, subtitle; -> Propriedade que compõe a descrição central do texto. Ambas podem ser opcionais.
   final TextStyle textStyle; -> Estilização da propriedade do texto Title
   final Widget prefix, sufix; -> Widget que deverá encontrar-se respectivamente a esquerda ou a direita dos textos.
-}`
+}
 
 ### MesaButtonDefaultWidget
 Widget responsável por retornar um botão de acordo com os estilos de botões encontrados no design.  O seu estilo varia entre o primário, loading e desabilitado, entretanto, nada impede novas customizações.
 
-`class MesaButtonDefaultWidget... {
+class MesaButtonDefaultWidget... {
     final String text; -> texto principal do botão.
   final TextStyle textStyle; Estilização do texto principal do botão
   final Color backgroundColor; -> Definição da cor de background do botão, por padrão atende a cor primária do style guides
   final BorderSide border; -> Definição da borda do botão
   final Function onPressed; -> função para callback de função
   final MesaButtonType type; -> Qual o tipo de botão deverá ser exibido. Loading | primary | desabled
-}`
+}
 
 ### MesaSwitchButtonWidget
 
 Widget que atende ao comportamente de switch atendendo as exigencias da interface, visto a limitação do Switch do material design.
 
-`class MesaSwitchButtonWidget ...{
+class MesaSwitchButtonWidget ...{
     final Function(bool) onChanged; -> Função que retorna o novo valor do switch;
   final bool value; -> valor incial do switch
-}`
+}
 
 ### MesaIconButtonWidget
 Widget para agrupar um ícone a uma resposta de toque.
 
-`class MesaIconButtonWidget ... {
+class MesaIconButtonWidget ... {
       final Function() onTap; -> função de callback ao clique no ícone
   final String iconPath; -> url do icone local
   final Color iconColor; -> cor do icone
-}`
+}
 
 ### MesaCardLastNewsWidget
 Widget para exibição das últimas notícias na página de home.
 
-` class MesaCardLastNewsWidget... {
+class MesaCardLastNewsWidget... {
       final String imagePath, title, description, dateTime, content; Definição das propriedades textuais (título, descrição, data formatada e conteúdo completo quando necessário exibir)
   final Function() onTap; Callback de resposta ao clique no card como inteiro
   final Function() onChanged; callbalck de resposta ao clique no icone de favoritar e desfavoritar o card
   final bool isbookmark; Estado de favorito podendo ser verdadeiro ou false
-}`
+}
 
 ### MesaCardTrendWidget
 Widget para exibição das notícias em destaque na página de home.
 
-`class MesaCardTrendWidget ... {
+class MesaCardTrendWidget ... {
    final String imagePath, dateTime, title; -> Definição das propriedades textuais (título, descrição, data formatada)
   final Function() onChanged, onTap; -> Callbacks para resposta ao clique no card ou no marcador de favorito
   final bool isbookmark;-> Estado de favorito podendo ser verdadeiro ou false
-}`
+}
 
 ### MesaFooterDefaultWidget
 Widget criado para reutilização de código para criação do footer do app.
 
-`class MesaFooterDefaultWidget... {
+class MesaFooterDefaultWidget... {
     final String text, textLink; -Texto que será exibido e texto que conterá o link para o redirecionamento
     final TextStyle textStyle, textLinkStyle; -> Propriedade para estilização dos respectivos textos
     final Function() onTap -> Callback de resposta ao clique no texto com link;
-}`
+}
 
 ### MesaTextFieldDefaultWidget
 Widget criado apra reutilziação do textfield padrão no app respeitando as especificações do design.
 
-`class MesaTextFieldDefaultWidget... {
+class MesaTextFieldDefaultWidget... {
 final String label; -> Label de descrição do textfield
   final TextInputType keyboardType; -> O tipo de textfield será
   final bool autofocus, obscureText; -> Se o valor digitado deverá ser ocultado ou não
   final Function(String) onChanged -> callback com retorno do que é digitado pelo usuário;
   final List<TextInputFormatter> maskFormatter -> Definição da mascara para formatação do valor digitado;
   final String errorText -> exibição do texto de erro no textfield;
-}`
+}
